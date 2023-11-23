@@ -1,0 +1,48 @@
+
+25.25370717048645
+{'X won': 2957, 'O won': 2534, 'Tie': 7466, 'total games': 10000}
+
+0.024148225784301758
+{'X won': 2, 'O won': 7, 'Tie': 3, 'total games': 10}
+
+0.42620086669921875
+{'X won': 35, 'O won': 26, 'Tie': 74, 'total games': 100}
+
+0.5400111675262451
+{'X won': 31, 'O won': 23, 'Tie': 46, 'total games': 100}
+
+4.6192731857299805
+{'X won': 292, 'O won': 259, 'Tie': 449, 'total games': 1000}
+
+4.736083507537842
+{'X won': 298, 'O won': 255, 'Tie': 447, 'total games': 1000}
+
+2.65560245513916
+{'X won': 264, 'O won': 245, 'Tie': 491, 'total games': 1000}
+
+25.67249298095703
+{'X won': 2847, 'O won': 2602, 'Tie': 4551, 'total games': 10000}
+
+23.659347772598267
+{'X won': 39, 'O won': 17, 'Tie': 44, 'total games': 100}
+
+0.24498271942138672
+{'X won': 0, 'O won': 0, 'Tie': 1, 'total games': 1}
+
+2.367276191711426
+{'X won': 2, 'O won': 4, 'Tie': 4, 'total games': 10}
+
+2.5305073261260986
+{'X won': 3, 'O won': 3, 'Tie': 4, 'total games': 10}
+
+2.4844141006469727
+{'X won': 6, 'O won': 2, 'Tie': 2, 'total games': 10}
+
+25.746443510055542
+{'X won': 26, 'O won': 24, 'Tie': 50, 'total games': 100}
+
+2.8693997859954834
+{'X won': 4, 'O won': 1, 'Tie': 5, 'total games': 10}
+
+2.7309906482696533
+{'X won': 4, 'O won': 3, 'Tie': 3, 'total games': 10}

@@ -20,10 +20,11 @@ def print_board(board):
     print("-"*21)
 
 def take_line_element():
-    position = int(input("choose tile (1-9): "))
-    while position not in range(1,10):
+    position = input("choose tile (1-9): ")
+    while position not in [str(i) for i in range(1,10)]:
         print("invalid tile")
-        position = int(input("choose tile (1-9): "))
+        position = input("choose tile (1-9): ")
+    position = int(position)
     line = (position-1)//3
     if line==-1:line=0
     
@@ -34,11 +35,12 @@ def take_line_element():
     return line, element, next_board
 
 def take_mini():
-    mini = int(input("choose small board (1-9): "))
-    while (mini not in range(1,10)) or (board_won[mini]==(True,"X")) or\
-        (board_won[mini]==(True,"O")) or (board_won[mini]=="Tie"):
+    mini = input("choose board (1-9): ")
+    while mini not in [str(i) for i in range(1,10)] or (board_won[int(mini)]==(True,"X")) or\
+        (board_won[int(mini)]==(True,"O")) or (board_won[int(mini)]=="Tie"):
         print("invalid board")
-        mini = int(input("choose small board (1-9): "))
+        mini = input("choose board (1-9): ")
+    mini = int(mini)
     return mini
 
 def initial_turn():
@@ -136,13 +138,13 @@ def play(next_board, turn):
     print(f"turn: {turn}")
     if board_won[next_board+1]!=False:
         check_mini(turn)
-        print_board(board)
         print(f"next board: any")
+        print_board(board)   
         next_board = turn_w_mini(turn)  
         check_mini(turn)  
     else:
-        print_board(board)
         print(f"next board: {next_board+1}")
+        print_board(board)
         next_board = turn_n_mini(next_board, turn)
         check_mini(turn)
         
@@ -151,7 +153,7 @@ def play(next_board, turn):
     
     return next_board, turn
 
-def game():
+def main():
     global board, game_over, board_won, game_final
     
     board = make_board()
@@ -163,8 +165,8 @@ def game():
     turn = "X"
     print(f"turn:{turn}")
     next_board = initial_turn()
-    print_board(board)
     print(f"next board: {next_board+1}")
+    print_board(board)
     turn = "O"
     
     while game_over == False:
@@ -172,10 +174,10 @@ def game():
         if game_over==True:
             break
         next_board, turn = play(next_board, turn)
-        print("")
+        print("\n\n\n")
         
     print_board(board)
     print("Game Over")
     return game_final
 
-game_final = game()
+main()

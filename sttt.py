@@ -25,12 +25,9 @@ def print_board(board):
     print("-"*21)
 
 def take_line_element():
-    position = random.randint(1,9)#int(input("choose tile (1-9): "))-1
-    #print(position)
+    position = random.randint(1,9)#int(input("choose tile (1-9): "))
     while position not in range(1,10):
-        #print("invalid tile")
-        position = random.randint(1,9)#int(input("choose tile (1-9): "))-1
-        #print(position)
+        position = random.randint(1,9)#int(input("choose tile (1-9): "))
     line = (position-1)//3
     if line==-1:line=0
     
@@ -41,13 +38,10 @@ def take_line_element():
     return line, element, next_board
 
 def take_mini():
-    mini = random.randint(1,9) #int(input("choose small board (1-9): "))-1
-    #print(mini)
+    mini = random.randint(1,9) #int(input("choose small board (1-9): "))
     while (mini not in range(1,10)) or (board_won[mini]==(True,"X")) or\
         (board_won[mini]==(True,"O")) or (board_won[mini]=="Tie"):
-        #print("invalid board")
-        mini = random.randint(1,9) #int(input("choose small board (1-9): "))-1
-        #print(mini)
+        mini = random.randint(1,9) #int(input("choose small board (1-9): "))
     return mini
 
 def initial_turn():
@@ -55,7 +49,6 @@ def initial_turn():
     line, element, next_board = take_line_element()
 
     while board[mini][line][element] != "-":
-        #print("invalid tile")
         line, element, next_board = take_line_element()
     
     board[mini][line][element] = "X"
@@ -65,7 +58,6 @@ def turn_w_mini(turn):
     mini = take_mini()-1
     line, element, next_board = take_line_element()
     while board[mini][line][element] != "-":
-        #print("invalid tile")
         line, element, next_board = take_line_element()
     if turn=="X":
         board[mini][line][element] = "X"
@@ -77,7 +69,6 @@ def turn_n_mini(mini, turn):
     line, element, next_board = take_line_element()
     
     while board[mini][line][element] != "-":
-        #print("invalid tile")
         line, element, next_board = take_line_element()
     
     if turn=="X":
@@ -125,7 +116,7 @@ def check_board():
     total_combinations = board+columns+diagonals
     for combination in total_combinations:
         if len(set(combination)) == 1 and combination[1]!=False and combination[1]!="Tie":
-            #print(f"{combination[1][1]} won the game")
+            print(f"{combination[1][1]} won the game")
             game_over = True
             if combination[1][1]=="X": game_final=1
             else: game_final=-1
@@ -134,7 +125,7 @@ def check_board():
     for mini in board_won.values():
         if mini != False: c+=1
     if c == 9:
-        #print(f"it's a tie")
+        print(f"it's a tie")
         game_over = True
         game_final = 0
         return game_over
@@ -144,13 +135,11 @@ def play(next_board, turn):
     global board_won, board, game_over
     if board_won[next_board+1]!=False:
         check_mini(turn)
-        #print_board(board)
-        #print(f"next board: any")
+        print_board(board)
         next_board = turn_w_mini(turn)  
         check_mini(turn)  
     else:
-        #print_board(board)
-        #print(f"next board: {next_board+1}")
+        print_board(board)
         next_board = turn_n_mini(next_board, turn)
         check_mini(turn)
         
@@ -161,18 +150,16 @@ def play(next_board, turn):
 
 def game():
     global board, game_over, board_won, game_final
-    
+    time.sleep(0.1)
     board = make_board()
     game_over = False
     board_won = {mini:False for mini in range(1,10)}
     game_final = ""
 
-    #print_board(board)
+    print_board(board)
     turn = "X"
-    #print(f"turn:{turn}")
     next_board = initial_turn()
-    #print_board(board)
-    #print(f"next board: {next_board+1}")
+    print_board(board)
     turn = "O"
     
     while game_over == False:
@@ -180,10 +167,10 @@ def game():
         if game_over==True:
             break
         next_board, turn = play(next_board, turn)
-        #print("")
+        print("")
         
-    #print_board(board)
-    #print("Game Over")
+    print_board(board)
+    print("Game Over")
     return game_final
 
 def plot_games(games, number_games):
@@ -199,15 +186,15 @@ def plot_games(games, number_games):
 def save_to_file(time_taken, stats):
     with open("statistics_file_ttt.txt","a") as file:
         file.write(f"\n{time_taken}\n{stats}\n")
-        
-if __name__ == "__main__":
+
+def main():
     start_time = time.time()
     games = {"X won":0,"O won":0,"Tie":0}
-    number_games = 100000
+    number_games = 10
     for i in range(number_games):
         game_final = game()
         if game_final==1: games["X won"]+=1
-        if game_final==-1: games["O won"]+=1
+        elif game_final==-1: games["O won"]+=1
         else: games["Tie"]+=1
         #os.system('cls')
     end_time = time.time()
@@ -218,4 +205,7 @@ if __name__ == "__main__":
     stats = {name:value for name,value in zip(names_stats,values_stats)}
     save_to_file(time_taken, stats)
     plot_games(games, number_games)
+    
+if __name__ == "__main__":
+    main()
     

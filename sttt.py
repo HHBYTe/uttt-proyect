@@ -1,6 +1,5 @@
 import random
 import matplotlib.pyplot as plt
-import os
 import time
 
 def make_board():
@@ -25,9 +24,7 @@ def print_board(board):
     print("-"*21)
 
 def take_line_element():
-    position = random.randint(1,9)#int(input("choose tile (1-9): "))
-    while position not in range(1,10):
-        position = random.randint(1,9)#int(input("choose tile (1-9): "))
+    position = random.randint(1,9)
     line = (position-1)//3
     if line==-1:line=0
     
@@ -38,10 +35,9 @@ def take_line_element():
     return line, element, next_board
 
 def take_mini():
-    mini = random.randint(1,9) #int(input("choose small board (1-9): "))
-    while (mini not in range(1,10)) or (board_won[mini]==(True,"X")) or\
-        (board_won[mini]==(True,"O")) or (board_won[mini]=="Tie"):
-        mini = random.randint(1,9) #int(input("choose small board (1-9): "))
+    mini = random.randint(1,9)
+    while (board_won[mini]==(True,"X")) or (board_won[mini]==(True,"O")) or (board_won[mini]=="Tie"):
+        mini = random.randint(1,9)
     return mini
 
 def initial_turn():
@@ -133,6 +129,7 @@ def check_board():
 
 def play(next_board, turn):
     global board_won, board, game_over
+    #time.sleep(0.2)
     if board_won[next_board+1]!=False:
         check_mini(turn)
         print_board(board)
@@ -150,7 +147,6 @@ def play(next_board, turn):
 
 def game():
     global board, game_over, board_won, game_final
-    time.sleep(0.1)
     board = make_board()
     game_over = False
     board_won = {mini:False for mini in range(1,10)}
